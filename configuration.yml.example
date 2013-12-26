@@ -1,4 +1,9 @@
-username: henare
-password: soupersekrit
-site: https://tickets.openaustraliafoundation.org.au/
-context_path: ''
+jira:
+  username: henare
+  password: soupersekrit
+  site: https://tickets.openaustraliafoundation.org.au/
+  context_path: ''
+github:
+  username: henare
+  password: souperdoupersekrit
+  repo: henare/jira_issues
