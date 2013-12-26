@@ -21,7 +21,7 @@ module JIRA
           Created | #{pretty_time(created)}
           Updated | #{pretty_time(updated)}
 
-          ## Comments
+          ### Imported Jira Comments
           TODO
         BODY
       end
