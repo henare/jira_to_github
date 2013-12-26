@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/henare/jira-ruby.git
-  revision: a0025a8433b3ff9c2be3484724c30dfd436277eb
-  ref: a0025a8
+  revision: ae8588701791c2fe9d879ab56700373181e2ff4a
+  branch: jira_to_github
   specs:
     jira-ruby (0.1.2)
       activesupport
