@@ -13,7 +13,12 @@ class JiraItem
      updated: item.at(:updated).inner_text,
      fixVersion: inner_text_or_nil(item.at :fixVersion),
      component: inner_text_or_nil(item.at :component)}
-     # attachment: item.at(:attachment).inner_text
+
+     # TODO: Attachment support - the project I'm looking at migrating first doesn't have any which is nice
+     # attachments: item.at(:attachments).inner_text
+
+     # TODO: Comments support
+     # comments: item.at(:comments)
   end
 
   private
