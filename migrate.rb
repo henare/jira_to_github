@@ -23,9 +23,9 @@ puts "Found #{jira_issues.count} Jira issues"
 
 def jira_to_github(jira_issue)
   # TODO: Add GitHub issue labels for additional Jira attributes e.g. issue type, priority, etc.
-  {title: "[#{jira_issue.attrs['key']}] #{jira_issue.attrs['fields']['summary']}",
+  {title: "[#{jira_issue.key}] #{jira_issue.summary}",
    # TODO: Add more information from Jira to the body
-   body: jira_issue.attrs['fields']['description']}
+   body: jira_issue.description}
 end
 
 # jira_issues.each do |jira_issue|
