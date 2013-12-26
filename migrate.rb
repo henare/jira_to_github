@@ -21,4 +21,14 @@ puts "Geting Jira issues for project key #{configuration['jira']['project_key']}
 jira_issues = client.Project.find(configuration['jira']['project_key']).issues
 puts "Found #{jira_issues.count} Jira issues"
 
-puts Octokit.issues(configuration['github']['repo']).count
+def jira_to_github(jira_issue)
+  {title: "[#{jira_issue.attrs['key']}] #{jira_issue.attrs['fields']['summary']}",
+   body: jira_issue.attrs['fields']['description']}
+end
+
+# jira_issues.each do |jira_issue|
+#   issue = jira_to_github(jira_issue)
+#   puts "Creating GitHub issue #{issue[:title]}..."
+#   github_issue = Octokit.create_issue configuration['github']['repo'], issue[:title], issue[:body]
+#   puts "Created GitHub issue ##{github_issue.number}"
+# end
