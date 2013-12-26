@@ -14,7 +14,7 @@ module JIRA
         if comments.empty?
           comment_text = ''
         else
-          comment_text = "### Imported Jira Comments\n"
+          comment_text = "---\n### Imported Jira Comments\n"
           comments.each do |comment|
             comment_text += pretty_comment(comment)
           end
