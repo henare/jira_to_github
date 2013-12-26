@@ -2,7 +2,7 @@ module JIRA
   module Resource
     class Issue
       def title
-        "[#{self.key}] #{self.summary}"
+        "[#{key}] #{summary}"
       end
 
       def body
@@ -10,7 +10,7 @@ module JIRA
 
         # TODO: Add more information from the issue to this for GitHub
         <<-BODY.gsub(/^ {10}/, '')
-          #{self.description}
+          #{description}
 
           ---
           **Issue details imported from Jira:**
@@ -18,9 +18,9 @@ module JIRA
           Detail | Value
           ------ | -----
           Assignee | #{assignee}
-          Reporter | #{self.reporter.displayName}
-          Created | #{pretty_time(self.created)}
-          Updated | #{pretty_time(self.updated)}
+          Reporter | #{reporter.displayName}
+          Created | #{pretty_time(created)}
+          Updated | #{pretty_time(updated)}
 
           ## Comments
           TODO
