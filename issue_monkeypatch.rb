@@ -19,8 +19,8 @@ module JIRA
           ------ | -----
           Assignee | #{assignee}
           Reporter | #{self.reporter.displayName}
-          Created | #{Date.parse(self.created).to_s}
-          Updated | #{Date.parse(self.created).to_s}
+          Created | #{pretty_time(self.created)}
+          Updated | #{pretty_time(self.updated)}
 
           ## Comments
           TODO
@@ -30,6 +30,13 @@ module JIRA
       def github_labels
         # TODO: Output labels, e.g.
         # ['Task', 'High priority', 'Component: Application', 'Version: Some version']
+      end
+
+      private
+
+      # HAHA our very own time parser thanks to insane Ruby parsing/formatting/timezone arsehattery
+      def pretty_time(time)
+        "#{time[0..9]} #{time[11..18]}"
       end
     end
   end
