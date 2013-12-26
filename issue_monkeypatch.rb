@@ -8,12 +8,12 @@ module JIRA
       def body
         assignee = assignee ? assignee.displayName : 'Unassigned'
 
+        # Add horizontal rule after any description
+        description = description ? description + "\n\n---\n" : ''
+
         # TODO: Add more information from the issue to this for GitHub
         <<-BODY.gsub(/^ {10}/, '')
-          #{description}
-
-          ---
-          **Issue details imported from Jira:**
+          #{description}**Issue details imported from Jira:**
 
           Detail | Value
           ------ | -----
