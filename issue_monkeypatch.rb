@@ -6,10 +6,10 @@ module JIRA
       end
 
       def body
-        assignee = assignee ? assignee.displayName : 'Unassigned'
+        assignee_text = assignee ? assignee.displayName : 'Unassigned'
 
         # Add horizontal rule after any description
-        description = description ? description + "\n\n---\n" : ''
+        description_text = description ? description + "\n\n---\n" : ''
 
         if comments.empty?
           comment_text = ''
@@ -21,11 +21,11 @@ module JIRA
         end
 
         <<-BODY.gsub(/^ {10}/, '')
-          #{description}**Issue details imported from Jira:**
+          #{description_text}**Issue details imported from Jira:**
 
           Detail | Value
           ------ | -----
-          Assignee | #{assignee}
+          Assignee | #{assignee_text}
           Reporter | #{reporter.displayName}
           Created | #{pretty_time(created)}
           Updated | #{pretty_time(updated)}
