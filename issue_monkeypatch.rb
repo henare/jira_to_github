@@ -51,7 +51,7 @@ module JIRA
       end
 
       def pretty_comment(comment)
-        "**#{comment.author['displayName']}** - #{pretty_time(comment.created)}\n" + comment.body.gsub(/^/, '>') + "\n"
+        "**#{comment.author['displayName']}** - #{pretty_time(comment.created)}\n" + comment.body.gsub(/^/, '>') + "\n\n"
       end
     end
   end
