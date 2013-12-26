@@ -17,6 +17,8 @@ Octokit.configure do |c|
   c.password = configuration['github']['password']
 end
 
-puts client.Project.find('PW').issues.count
+puts "Geting Jira issues for project key #{configuration['jira']['project_key']}..."
+jira_issues = client.Project.find(configuration['jira']['project_key']).issues
+puts "Found #{jira_issues.count} Jira issues"
 
 puts Octokit.issues(configuration['github']['repo']).count

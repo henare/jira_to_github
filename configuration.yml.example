@@ -3,6 +3,7 @@ jira:
   password: soupersekrit
   site: https://tickets.openaustraliafoundation.org.au/
   context_path: ''
+  project_key: PW
 github:
   username: henare
   password: souperdoupersekrit
