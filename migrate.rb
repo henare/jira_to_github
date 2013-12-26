@@ -3,6 +3,7 @@
 require 'jira'
 require 'yaml'
 require 'octokit'
+require_relative 'issue_monkeypatch'
 
 configuration = YAML.load File.open('configuration.yml')
 
@@ -23,9 +24,8 @@ puts "Found #{jira_issues.count} Jira issues"
 
 def jira_to_github(jira_issue)
   # TODO: Add GitHub issue labels for additional Jira attributes e.g. issue type, priority, etc.
-  {title: "[#{jira_issue.key}] #{jira_issue.summary}",
-   # TODO: Add more information from Jira to the body
-   body: jira_issue.description}
+  {title: jira_issue.title,
+   body: jira_issue.body}
 end
 
 # jira_issues.each do |jira_issue|
