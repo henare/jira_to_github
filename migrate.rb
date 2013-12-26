@@ -26,5 +26,19 @@ jira_issues.each do |issue|
   puts "Creating GitHub issue #{issue.title}..."
   github_issue = Octokit.create_issue configuration['github']['repo'], issue.title, issue.body, {labels: issue.github_labels}
   puts "Created GitHub issue ##{github_issue.number}"
-  # TODO: Support closed issues (we need to close the issue we just opened)
+
+  case issue.status.name
+  when "Resolved", "Closed"
+    puts "Closing GitHub issue ##{github_issue.number} as it was already closed in Jira"
+    labels = issue.github_labels
+
+    case issue.resolution['name']
+    when "Won't Fix"
+      labels << "wontfix"
+    when "Duplicate"
+      labels << "duplicate"
+    end
+
+    Octokit.close_issue configuration['github']['repo'], github_issue.number, {labels: labels}
+  end
 end
