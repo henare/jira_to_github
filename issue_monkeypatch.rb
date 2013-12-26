@@ -1,3 +1,5 @@
+require_relative 'marksy'
+
 module JIRA
   module Resource
     class Issue
@@ -9,7 +11,7 @@ module JIRA
         assignee_text = assignee ? assignee.displayName : 'Unassigned'
 
         # Add horizontal rule after any description
-        description_text = description ? description + "\n\n---\n" : ''
+        description_text = description ? Marksy.jira_to_markdown(description) + "\n\n---\n" : ''
 
         if comments.empty?
           comment_text = ''
@@ -51,7 +53,8 @@ module JIRA
       end
 
       def pretty_comment(comment)
-        "**#{comment.author['displayName']}** - #{pretty_time(comment.created)}\n" + comment.body.gsub(/^/, '>') + "\n\n"
+        comment_body = Marksy.jira_to_markdown(comment.body)
+        "**#{comment.author['displayName']}** - #{pretty_time(comment.created)}\n" + comment_body.gsub(/^/, '>') + "\n\n"
       end
     end
   end
