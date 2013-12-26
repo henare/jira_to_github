@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
 
-require_relative 'lib/jira_issue'
-require_relative 'lib/jira_item'
-require 'nokogiri'
+require 'jira'
+require 'yaml'
 
-file = File.open('../PW.xml')
-doc = Nokogiri::XML file
+configuration = YAML.load File.open('configuration.yml')
 
-doc.search(:item).each do |item|
-  issue = JiraIssue.new JiraItem.parse(item)
-  p issue
-end
+client = JIRA::Client.new username: configuration['username'],
+                          password: configuration['password'],
+                          auth_type: :basic,
+                          site: configuration['site'],
+                          context_path: configuration['context_path']
+
+puts client.Project.find('PW').issues.count
