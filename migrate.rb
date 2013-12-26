@@ -24,7 +24,7 @@ puts "Found #{jira_issues.count} Jira issues"
 
 jira_issues.each do |issue|
   puts "Creating GitHub issue #{issue.title}..."
-  github_issue = Octokit.create_issue configuration['github']['repo'], issue.title, issue.body, {labels: issue.labels}
+  github_issue = Octokit.create_issue configuration['github']['repo'], issue.title, issue.body, {labels: issue.github_labels}
   puts "Created GitHub issue ##{github_issue.number}"
   # TODO: Support closed issues (we need to close the issue we just opened)
 end
