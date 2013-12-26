@@ -22,7 +22,9 @@ jira_issues = client.Project.find(configuration['jira']['project_key']).issues
 puts "Found #{jira_issues.count} Jira issues"
 
 def jira_to_github(jira_issue)
+  # TODO: Add GitHub issue labels for additional Jira attributes e.g. issue type, priority, etc.
   {title: "[#{jira_issue.attrs['key']}] #{jira_issue.attrs['fields']['summary']}",
+   # TODO: Add more information from Jira to the body
    body: jira_issue.attrs['fields']['description']}
 end
 
