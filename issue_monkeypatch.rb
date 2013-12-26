@@ -11,6 +11,15 @@ module JIRA
         # Add horizontal rule after any description
         description = description ? description + "\n\n---\n" : ''
 
+        if comments.empty?
+          comment_text = ''
+        else
+          comment_text = "### Imported Jira Comments\n"
+          comments.each do |comment|
+            comment_text += pretty_comment(comment)
+          end
+        end
+
         <<-BODY.gsub(/^ {10}/, '')
           #{description}**Issue details imported from Jira:**
 
@@ -20,9 +29,7 @@ module JIRA
           Reporter | #{reporter.displayName}
           Created | #{pretty_time(created)}
           Updated | #{pretty_time(updated)}
-
-          ### Imported Jira Comments
-          TODO
+          #{comment_text}
         BODY
       end
 
@@ -41,6 +48,10 @@ module JIRA
       # HAHA our very own time parser thanks to insane Ruby parsing/formatting/timezone arsehattery
       def pretty_time(time)
         "#{time[0..9]} #{time[11..18]}"
+      end
+
+      def pretty_comment(comment)
+        "**#{comment.author['displayName']}** - #{pretty_time(comment.created)}\n" + comment.body.gsub(/^/, '>') + "\n"
       end
     end
   end
