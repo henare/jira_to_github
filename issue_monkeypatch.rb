@@ -2,7 +2,7 @@ module JIRA
   module Resource
     class Issue
       def title
-        "[#{key}] #{summary}"
+        "#{summary} (#{key})"
       end
 
       def body
