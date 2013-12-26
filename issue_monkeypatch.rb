@@ -27,10 +27,10 @@ module JIRA
       end
 
       def github_labels
-        labels = [issuetype.name, "Priority: #{priority.name}"]
-        labels << "Component: #{components.first.name}" unless components.empty?
+        labels = [issuetype.name.downcase, priority.name.downcase]
+        labels << components.first.name unless components.empty?
         # We always use fixVersion for tracking milestones
-        labels << "Version: #{fields['fixVersions'].first['name']}" unless fields['fixVersions'].empty?
+        labels << fields['fixVersions'].first['name'] unless fields['fixVersions'].empty?
 
         labels
       end
