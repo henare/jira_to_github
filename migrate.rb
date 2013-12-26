@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require_relative 'lib/jira_issue'
 require_relative 'lib/jira_item'
 require 'nokogiri'
