@@ -3,7 +3,7 @@
 require 'jira'
 require 'yaml'
 require 'octokit'
-require_relative 'issue_monkeypatch'
+require_relative 'lib/issue_monkeypatch'
 
 configuration = YAML.load File.open('configuration.yml')
 
