@@ -59,7 +59,7 @@ module JIRA
         response = client.post '/rest/api/1.0/render',
                                {"rendererType" => "atlassian-wiki-renderer", "unrenderedMarkup" => text}.to_json,
                                {'Accept' => 'text/html'}
-        response.body
+        response.body.force_encoding('UTF-8')
       end
     end
   end
