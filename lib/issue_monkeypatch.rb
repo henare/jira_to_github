@@ -1,3 +1,5 @@
+require 'reverse_markdown'
+
 module JIRA
   module Resource
     class Issue
@@ -9,7 +11,7 @@ module JIRA
         assignee_text = assignee ? assignee.displayName : 'Unassigned'
 
         # Add horizontal rule after any description
-        description_text = description ? description + "\n\n---\n" : ''
+        description_text = description ? render_to_markdown(description) + "\n\n---\n" : ''
 
         if comments.empty?
           comment_text = ''
@@ -51,7 +53,19 @@ module JIRA
       end
 
       def pretty_comment(comment)
-        "**#{comment.author['displayName']}** - #{pretty_time(comment.created)}\n" + comment.body.gsub(/^/, '>') + "\n\n"
+        comment_body = render_to_markdown(comment.body)
+        "**#{comment.author['displayName']}** - #{pretty_time(comment.created)}\n" + comment_body.gsub(/^/, '>') + "\n\n"
+      end
+
+      def render_to_markdown(text)
+        ReverseMarkdown.parse(jira_markup_to_html(text))
+      end
+
+      def jira_markup_to_html(text)
+        response = client.post '/rest/api/1.0/render',
+                               {"rendererType" => "atlassian-wiki-renderer", "unrenderedMarkup" => text}.to_json,
+                               {'Accept' => 'text/html'}
+        response.body
       end
     end
   end
