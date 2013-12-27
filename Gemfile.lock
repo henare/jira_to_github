@@ -21,17 +21,12 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     i18n (0.6.9)
-    mini_portile (0.5.1)
     minitest (4.7.5)
     multi_json (1.8.2)
     multipart-post (1.2.0)
-    nokogiri (1.6.0)
-      mini_portile (~> 0.5.0)
     oauth (0.4.7)
     octokit (2.7.0)
       sawyer (~> 0.5.2)
-    reverse_markdown (0.4.7)
-      nokogiri
     sawyer (0.5.2)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
@@ -45,4 +40,3 @@ PLATFORMS
 DEPENDENCIES
   jira-ruby!
   octokit
-  reverse_markdown

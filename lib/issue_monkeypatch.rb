@@ -1,5 +1,3 @@
-require 'reverse_markdown'
-
 module JIRA
   module Resource
     class Issue
@@ -11,7 +9,7 @@ module JIRA
         assignee_text = assignee ? assignee.displayName : 'Unassigned'
 
         # Add horizontal rule after any description
-        description_text = description ? render_to_markdown(description) + "\n\n---\n" : ''
+        description_text = description ? jira_markup_to_html(description) + "\n\n---\n" : ''
 
         if comments.empty?
           comment_text = ''
@@ -53,12 +51,8 @@ module JIRA
       end
 
       def pretty_comment(comment)
-        comment_body = render_to_markdown(comment.body)
+        comment_body = jira_markup_to_html(comment.body)
         "**#{comment.author['displayName']}** - #{pretty_time(comment.created)}\n" + comment_body.gsub(/^/, '>') + "\n\n"
-      end
-
-      def render_to_markdown(text)
-        ReverseMarkdown.parse(jira_markup_to_html(text))
       end
 
       def jira_markup_to_html(text)
