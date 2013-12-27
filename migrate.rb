@@ -18,8 +18,11 @@ Octokit.configure do |c|
   c.password = configuration['github']['password']
 end
 
+START_AT_ISSUE = 1
+
 puts "Geting Jira issues for project key #{configuration['jira']['project_key']}..."
-jira_issues = client.Project.find(configuration['jira']['project_key']).issues.reverse
+query = "key >= #{configuration['jira']['project_key']}-#{START_AT_ISSUE}"
+jira_issues = client.Issue.jql(query).reverse
 puts "Found #{jira_issues.count} Jira issues"
 
 jira_issues.each do |issue|
