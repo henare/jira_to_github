@@ -6,6 +6,21 @@ It does this by connecting to your Jira instance using the REST API and
 extracting all the issues. It then formats them, preserving as much relevant
 detail as possible, and creates them on your GitHub project via their API.
 
+## Limitations
+
+Jira and GitHub Issues are quite different in what fields they support, how
+they work and so on. This script tries to preserve as much as possible by
+adding things like comments to the issue body, nicely formatted as Markdown.
+
+There are some things which aren't preserved and these might be important to
+you. Attachments aren't supported in GitHub (except images) and these are not
+migrated. The script will warn you about what issues have attachments but it's
+up to you to work out what to do with them.
+
+Speed might also be an issue. The script uses the Jira API to format rich issue
+descriptions and comments so it can make many API calls even just for one
+issue.
+
 ## Usage
 
 To use this script you'll want to review the formatting of the outputted
