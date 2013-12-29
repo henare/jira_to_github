@@ -25,7 +25,7 @@ query = "key >= #{configuration['jira']['project_key']}-#{START_AT_ISSUE}"
 jira_issues = client.Issue.jql(query).reverse
 puts "Found #{jira_issues.count} Jira issues"
 
-@issues_with_attachments = []
+issues_with_attachments = []
 
 jira_issues.each do |issue|
   puts "Creating GitHub issue #{issue.title}..."
@@ -34,7 +34,7 @@ jira_issues.each do |issue|
 
   if issue.attachments.count > 0
     puts "WARNING: #{issue.key} has attachments. These are not automatically migrated!"
-    @issues_with_attachments << issue
+    issues_with_attachments << issue
   end
 
   case issue.status.name
@@ -55,7 +55,7 @@ end
 
 puts "Migration complete."
 
-if !@issues_with_attachments.empty?
+if !issues_with_attachments.empty?
   puts "The following Jira issues have attachments, these are not automatically migrated:"
-  @issues_with_attachments.each { |i| puts i.key }
+  issues_with_attachments.each { |i| puts i.key }
 end
