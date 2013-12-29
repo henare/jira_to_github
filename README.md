@@ -14,8 +14,8 @@ adding things like comments to the issue body, nicely formatted as Markdown.
 
 There are some things which aren't preserved and these might be important to
 you. Attachments aren't supported in GitHub (except images) and these are not
-migrated. The script will warn you about what issues have attachments but it's
-up to you to work out what to do with them.
+migrated. The script will show a link in the issue body to a place where you'll
+need to make your old attachments available.
 
 Speed might also be an issue. The script uses the Jira API to format rich issue
 descriptions and comments so it can make many API calls even just for one
