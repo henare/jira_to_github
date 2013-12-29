@@ -6,10 +6,10 @@ module JIRA
       end
 
       def body
-        assignee_text = assignee ? assignee.displayName : 'Unassigned'
-
         # Add horizontal rule after any description
         description_text = description ? jira_markup_to_html(description) + "\n\n---\n" : ''
+
+        assignee_text = assignee ? assignee.displayName : 'Unassigned'
 
         if comments.empty?
           comment_text = ''
