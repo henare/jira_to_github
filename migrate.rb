@@ -35,6 +35,9 @@ jira_issues.each do |issue|
 
   mappings << {jira_issue: issue, github_issue: github_issue}
 
+  puts "# Apache redirect"
+  puts "Redirect /browse/#{issue.key} https://github.com/#{configuration['github']['repo']}/issues/#{github_issue.number}"
+
   case issue.status.name
   when "Resolved", "Closed"
     puts "Closing GitHub issue ##{github_issue.number} as it was already closed in Jira"
