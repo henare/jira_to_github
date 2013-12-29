@@ -63,7 +63,7 @@ module JIRA
           response = client.post '/rest/api/1.0/render',
                                  {"rendererType" => "atlassian-wiki-renderer", "unrenderedMarkup" => text}.to_json,
                                  {'Accept' => 'text/html'}
-        rescue JIRA::HTTPError
+        rescue
           raise if retries >= 5
           retries += 1
           retry
