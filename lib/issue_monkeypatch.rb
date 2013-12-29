@@ -11,6 +11,8 @@ module JIRA
 
         assignee_text = assignee ? assignee.displayName : 'Unassigned'
 
+        attachments_text = attachments.empty? ? '' : ":paperclip: Jira attachments: #{ATTACHMENTS_BASE_URL}#{key}\n\n"
+
         if comments.empty?
           comment_text = ''
         else
@@ -29,7 +31,7 @@ module JIRA
           Reporter | #{reporter.displayName}
           Created | #{pretty_time(created)}
           Updated | #{pretty_time(updated)}
-          #{comment_text}
+          #{attachments_text}#{comment_text}
         BODY
       end
 

@@ -6,6 +6,7 @@ require 'octokit'
 require_relative 'lib/issue_monkeypatch'
 
 configuration = YAML.load File.open('configuration.yml')
+ATTACHMENTS_BASE_URL = "#{configuration['jira']['site']}attachments/#{configuration['jira']['project_key']}/"
 
 client = JIRA::Client.new username: configuration['jira']['username'],
                           password: configuration['jira']['password'],
